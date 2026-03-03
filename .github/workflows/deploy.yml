@@ -38,23 +38,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 5. 安装主题（如果缓存未命中）
+      # 5. 安装 Matery 主题（如果缓存未命中）
       - name: Install Matery Theme
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           git clone https://github.com/blinkfox/hexo-theme-matery.git themes/matery
           rm -rf themes/matery/.git themes/matery/.github
 
-      # 6. 安装主题所需插件
-      - name: Install theme plugins
-        run: |
-          npm install hexo-generator-search hexo-generator-feed hexo-generator-json-content hexo-generator-category-page hexo-generator-tag-page hexo-wordcount --save
-
-      # 7. 生成静态文件
+      # 6. 生成静态文件
       - name: Generate static files
         run: npx hexo generate
 
-      # 8. 部署到 GitHub Pages
+      # 7. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

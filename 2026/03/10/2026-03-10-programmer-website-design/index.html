@@ -1,0 +1,1331 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="程序员如何设计一个网站：从 Moltbook 学到的实战经验, 技术,博客,编程,学习笔记">
+    <meta name="description" content="程序员如何设计一个网站：从 Moltbook 学到的实战经验前言作为一个程序员，我们往往擅长写代码，但设计一个完整的网站需要考虑的东西远不止代码。最近研究 Moltbook 这个项目，发现它的设计文档里藏着不少程序员该学的知识。这篇文章就从">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>程序员如何设计一个网站：从 Moltbook 学到的实战经验 | GaoHui&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="GaoHui's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">GaoHui&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">GaoHui&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            个人技术博客，分享编程知识和技术心得
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">程序员如何设计一个网站：从 Moltbook 学到的实战经验</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/">
+                                <span class="chip bg-color">网站设计</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                                <span class="chip bg-color">编程</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BB%8F%E9%AA%8C/">
+                                <span class="chip bg-color">经验</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-03-10
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="程序员如何设计一个网站：从-Moltbook-学到的实战经验"><a href="#程序员如何设计一个网站：从-Moltbook-学到的实战经验" class="headerlink" title="程序员如何设计一个网站：从 Moltbook 学到的实战经验"></a>程序员如何设计一个网站：从 Moltbook 学到的实战经验</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一个程序员，我们往往擅长写代码，但设计一个完整的网站需要考虑的东西远不止代码。最近研究 Moltbook 这个项目，发现它的设计文档里藏着不少程序员该学的知识。这篇文章就从程序员视角，聊聊设计网站时要考虑哪些事。</p>
+<hr>
+<h2 id="一、别急着写代码，先把文档结构理清楚"><a href="#一、别急着写代码，先把文档结构理清楚" class="headerlink" title="一、别急着写代码，先把文档结构理清楚"></a>一、别急着写代码，先把文档结构理清楚</h2><h3 id="1-1-Moltbook-的文档组织方式"><a href="#1-1-Moltbook-的文档组织方式" class="headerlink" title="1.1 Moltbook 的文档组织方式"></a>1.1 Moltbook 的文档组织方式</h3><p>Moltbook 把文档分成四个文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">moltbook_skill/</span><br><span class="line">├── skill.md      # API 接口文档</span><br><span class="line">├── heartbeat.md  # 运维和自动化流程</span><br><span class="line">├── messaging.md  # 私信功能详细说明</span><br><span class="line">└── skill.json    # 配置和元数据</span><br></pre></td></tr></table></figure>
+
+<p>每个文件职责单一，找东西不用翻半天。</p>
+<h3 id="1-2-对我们自己的项目有什么启发"><a href="#1-2-对我们自己的项目有什么启发" class="headerlink" title="1.2 对我们自己的项目有什么启发"></a>1.2 对我们自己的项目有什么启发</h3><p><strong>错误做法</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docs/</span><br><span class="line">└── README.md  # 所有内容堆在一起，几百行</span><br></pre></td></tr></table></figure>
+
+<p><strong>正确做法</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docs/</span><br><span class="line">├── API.md           # 接口文档：给谁看？其他开发者</span><br><span class="line">├── DEPLOY.md        # 部署文档：给谁看？运维同事</span><br><span class="line">├── ARCHITECTURE.md  # 架构设计：给谁看？团队技术评审</span><br><span class="line">├── DEVELOPMENT.md   # 开发指南：给谁看？新加入的开发者</span><br><span class="line">└── CHANGELOG.md     # 版本记录：给谁看？所有人</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-程序员该学什么"><a href="#1-3-程序员该学什么" class="headerlink" title="1.3 程序员该学什么"></a>1.3 程序员该学什么</h3><ul>
+<li><strong>Markdown 语法</strong>：写文档必备</li>
+<li><strong>文档生成工具</strong>：Swagger&#x2F;OpenAPI（自动生成 API 文档）、MkDocs（静态文档站点）</li>
+<li><strong>版本管理</strong>：文档也要版本控制，和代码一起管理</li>
+</ul>
+<hr>
+<h2 id="二、API-设计要规范，别让别人猜"><a href="#二、API-设计要规范，别让别人猜" class="headerlink" title="二、API 设计要规范，别让别人猜"></a>二、API 设计要规范，别让别人猜</h2><h3 id="2-1-Moltbook-的-API-设计特点"><a href="#2-1-Moltbook-的-API-设计特点" class="headerlink" title="2.1 Moltbook 的 API 设计特点"></a>2.1 Moltbook 的 API 设计特点</h3><p><strong>RESTful 风格</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET    /api/v1/posts          # 获取帖子列表</span><br><span class="line">POST   /api/v1/posts          # 创建帖子</span><br><span class="line">GET    /api/v1/posts/&#123;id&#125;     # 获取单个帖子</span><br><span class="line">DELETE /api/v1/posts/&#123;id&#125;     # 删除帖子</span><br></pre></td></tr></table></figure>
+
+<p><strong>统一的响应格式</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 成功</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;success&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 失败</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;success&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;error&quot;</span><span class="punctuation">:</span> <span class="string">&quot;具体错误信息&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;hint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;怎么解决&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-对我们自己的项目有什么启发"><a href="#2-2-对我们自己的项目有什么启发" class="headerlink" title="2.2 对我们自己的项目有什么启发"></a>2.2 对我们自己的项目有什么启发</h3><p><strong>错误做法</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口路径混乱</span></span><br><span class="line">/getUserData?id=<span class="number">123</span></span><br><span class="line">/create_new_post</span><br><span class="line">/api/v2/updateUserProfile</span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应格式不统一</span></span><br><span class="line">&#123; <span class="string">&quot;code&quot;</span>: <span class="number">200</span>, <span class="string">&quot;result&quot;</span>: &#123;...&#125; &#125;</span><br><span class="line">&#123; <span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;data&quot;</span>: &#123;...&#125; &#125;</span><br><span class="line">&#123; <span class="string">&quot;error&quot;</span>: <span class="literal">null</span>, <span class="string">&quot;response&quot;</span>: &#123;...&#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>正确做法</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统一的 RESTful 路径</span></span><br><span class="line"><span class="variable constant_">GET</span>    /api/v1/users/&#123;id&#125;</span><br><span class="line"><span class="variable constant_">POST</span>   /api/v1/posts</span><br><span class="line"><span class="variable constant_">PUT</span>    /api/v1/posts/&#123;id&#125;</span><br><span class="line"><span class="variable constant_">DELETE</span> /api/v1/posts/&#123;id&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一的响应格式</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;success&quot;</span>: boolean,</span><br><span class="line">  <span class="string">&quot;data&quot;</span>: object | <span class="literal">null</span>,</span><br><span class="line">  <span class="string">&quot;error&quot;</span>: string | <span class="literal">null</span>,</span><br><span class="line">  <span class="string">&quot;meta&quot;</span>: &#123;          <span class="comment">// 分页等信息</span></span><br><span class="line">    <span class="string">&quot;page&quot;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;total&quot;</span>: <span class="number">100</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-程序员该学什么"><a href="#2-3-程序员该学什么" class="headerlink" title="2.3 程序员该学什么"></a>2.3 程序员该学什么</h3><ul>
+<li><strong>RESTful API 设计规范</strong>：HTTP 方法、状态码、路径设计</li>
+<li><strong>API 版本控制</strong>：v1、v2 怎么管理</li>
+<li><strong>接口文档工具</strong>：Swagger、Postman、Apifox</li>
+<li><strong>GraphQL</strong>：另一种 API 设计思路，按需获取数据</li>
+</ul>
+<hr>
+<h2 id="三、安全要从设计阶段就考虑"><a href="#三、安全要从设计阶段就考虑" class="headerlink" title="三、安全要从设计阶段就考虑"></a>三、安全要从设计阶段就考虑</h2><h3 id="3-1-Moltbook-的安全设计"><a href="#3-1-Moltbook-的安全设计" class="headerlink" title="3.1 Moltbook 的安全设计"></a>3.1 Moltbook 的安全设计</h3><p><strong>多层防护</strong>：</p>
+<ol>
+<li><strong>传输层</strong>：强制 HTTPS，明确提示不带 www 会丢失认证信息</li>
+<li><strong>认证层</strong>：API Key + Bearer Token，明确告知绝不能发送到其他域名</li>
+<li><strong>责任层</strong>：人类认领机制，每个 AI 都有人类负责人</li>
+</ol>
+<p><strong>安全提示示例</strong>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">⚠️ <span class="strong">**IMPORTANT:**</span> </span><br><span class="line"><span class="bullet">-</span> Always use <span class="code">`https://www.moltbook.com`</span> (with <span class="code">`www`</span>)</span><br><span class="line"><span class="bullet">-</span> Using <span class="code">`moltbook.com`</span> without <span class="code">`www`</span> will redirect and strip your Authorization header!</span><br><span class="line"></span><br><span class="line">🔒 <span class="strong">**CRITICAL SECURITY WARNING:**</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**NEVER**</span> send your API key to any domain other than <span class="code">`www.moltbook.com`</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-对我们自己的项目有什么启发"><a href="#3-2-对我们自己的项目有什么启发" class="headerlink" title="3.2 对我们自己的项目有什么启发"></a>3.2 对我们自己的项目有什么启发</h3><p><strong>必须做的安全措施</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 强制 HTTPS</span></span><br><span class="line"><span class="keyword">if</span> (!req.<span class="property">secure</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">redirect</span>(<span class="number">301</span>, <span class="string">`https://<span class="subst">$&#123;req.headers.host&#125;</span><span class="subst">$&#123;req.url&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. CORS 限制，只允许特定域名</span></span><br><span class="line"><span class="keyword">const</span> corsOptions = &#123;</span><br><span class="line">  <span class="attr">origin</span>: [<span class="string">&#x27;https://yourdomain.com&#x27;</span>, <span class="string">&#x27;https://app.yourdomain.com&#x27;</span>],</span><br><span class="line">  <span class="attr">credentials</span>: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>(corsOptions));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. API Key 验证</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">authenticate</span> = (<span class="params">req, res, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> token = req.<span class="property">headers</span>.<span class="property">authorization</span>?.<span class="title function_">replace</span>(<span class="string">&#x27;Bearer &#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!token || !<span class="title function_">isValidToken</span>(token)) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">401</span>).<span class="title function_">json</span>(&#123; </span><br><span class="line">      <span class="attr">success</span>: <span class="literal">false</span>, </span><br><span class="line">      <span class="attr">error</span>: <span class="string">&#x27;Unauthorized&#x27;</span>,</span><br><span class="line">      <span class="attr">hint</span>: <span class="string">&#x27;Check your API key in the Authorization header&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 频率限制，防止暴力破解</span></span><br><span class="line"><span class="keyword">const</span> rateLimit = <span class="built_in">require</span>(<span class="string">&#x27;express-rate-limit&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> limiter = <span class="title function_">rateLimit</span>(&#123;</span><br><span class="line">  <span class="attr">windowMs</span>: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>, <span class="comment">// 15分钟</span></span><br><span class="line">  <span class="attr">max</span>: <span class="number">100</span> <span class="comment">// 最多100次请求</span></span><br><span class="line">&#125;);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api/&#x27;</span>, limiter);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-程序员该学什么"><a href="#3-3-程序员该学什么" class="headerlink" title="3.3 程序员该学什么"></a>3.3 程序员该学什么</h3><ul>
+<li><strong>HTTPS&#x2F;TLS</strong>：证书申请、配置、续期</li>
+<li><strong>认证授权</strong>：JWT、OAuth2、Session</li>
+<li><strong>常见攻击防护</strong>：XSS、CSRF、SQL 注入</li>
+<li><strong>安全头部</strong>：Content Security Policy、X-Frame-Options 等</li>
+<li><strong>密码安全</strong>：bcrypt、Argon2 等哈希算法</li>
+</ul>
+<hr>
+<h2 id="四、人机协作的边界要设计清楚"><a href="#四、人机协作的边界要设计清楚" class="headerlink" title="四、人机协作的边界要设计清楚"></a>四、人机协作的边界要设计清楚</h2><h3 id="4-1-Moltbook-的做法"><a href="#4-1-Moltbook-的做法" class="headerlink" title="4.1 Moltbook 的做法"></a>4.1 Moltbook 的做法</h3><p><strong>AI 自主处理</strong>：</p>
+<ul>
+<li>浏览内容、点赞评论</li>
+<li>按规则发帖</li>
+<li>技术性问题回复</li>
+<li>定期检查状态（心跳机制）</li>
+</ul>
+<p><strong>必须人类批准</strong>：</p>
+<ul>
+<li>新的私信请求</li>
+<li>敏感话题讨论</li>
+<li>争议内容处理</li>
+</ul>
+<h3 id="4-2-对我们自己的项目有什么启发"><a href="#4-2-对我们自己的项目有什么启发" class="headerlink" title="4.2 对我们自己的项目有什么启发"></a>4.2 对我们自己的项目有什么启发</h3><p><strong>设计一个客服系统的例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求分类器</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">classifyRequest</span> = (<span class="params">message</span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 简单问题：AI 直接回复</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isFAQ</span>(message)) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">type</span>: <span class="string">&#x27;auto&#x27;</span>, <span class="attr">handler</span>: <span class="string">&#x27;ai&#x27;</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 技术问题：AI 给方案，但标记为&quot;建议&quot;</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTechnical</span>(message)) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">type</span>: <span class="string">&#x27;suggestion&#x27;</span>, <span class="attr">handler</span>: <span class="string">&#x27;ai_with_human_review&#x27;</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 敏感问题：必须人工处理</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">containsSensitiveWords</span>(message)) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">type</span>: <span class="string">&#x27;manual&#x27;</span>, <span class="attr">handler</span>: <span class="string">&#x27;human_only&#x27;</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 不确定：AI 尝试回答，但提供转人工选项</span></span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">type</span>: <span class="string">&#x27;uncertain&#x27;</span>, <span class="attr">handler</span>: <span class="string">&#x27;ai_with_escalation&#x27;</span> &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 升级机制</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">escalateToHuman</span> = (<span class="params">conversationId, reason</span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 1. 通知人工客服</span></span><br><span class="line">  <span class="title function_">notifyHumanAgent</span>(conversationId, reason);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 2. 标记会话状态</span></span><br><span class="line">  <span class="title function_">updateConversationStatus</span>(conversationId, <span class="string">&#x27;pending_human&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 3. 给用户提示</span></span><br><span class="line">  <span class="title function_">sendMessageToUser</span>(conversationId, <span class="string">&#x27;已为您转接人工客服，请稍候...&#x27;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-程序员该学什么"><a href="#4-3-程序员该学什么" class="headerlink" title="4.3 程序员该学什么"></a>4.3 程序员该学什么</h3><ul>
+<li><strong>状态机设计</strong>：如何设计清晰的状态流转</li>
+<li><strong>工作流引擎</strong>：复杂业务流程的编排</li>
+<li><strong>消息队列</strong>：异步处理、削峰填谷</li>
+<li><strong>WebSocket</strong>：实时通信，人工介入时的无缝切换</li>
+</ul>
+<hr>
+<h2 id="五、自动化运维不是可有可无"><a href="#五、自动化运维不是可有可无" class="headerlink" title="五、自动化运维不是可有可无"></a>五、自动化运维不是可有可无</h2><h3 id="5-1-Moltbook-的心跳机制"><a href="#5-1-Moltbook-的心跳机制" class="headerlink" title="5.1 Moltbook 的心跳机制"></a>5.1 Moltbook 的心跳机制</h3><p>每 4 小时检查一次：</p>
+<ol>
+<li>技能版本是否有更新</li>
+<li></li>
+</ol>
+<p> 账号状态是否正常<br>3. 有没有新的私信或请求<br>4. 内容互动情况</p>
+<h3 id="5-2-对我们自己的项目有什么启发"><a href="#5-2-对我们自己的项目有什么启发" class="headerlink" title="5.2 对我们自己的项目有什么启发"></a>5.2 对我们自己的项目有什么启发</h3><p><strong>实现一个健康检查服务</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// health-check.js</span></span><br><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">&#x27;axios&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HealthChecker</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">checks</span> = [</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;数据库连接&#x27;</span>, <span class="attr">fn</span>: <span class="variable language_">this</span>.<span class="property">checkDatabase</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;Redis连接&#x27;</span>, <span class="attr">fn</span>: <span class="variable language_">this</span>.<span class="property">checkRedis</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;第三方API&#x27;</span>, <span class="attr">fn</span>: <span class="variable language_">this</span>.<span class="property">checkThirdPartyAPI</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;磁盘空间&#x27;</span>, <span class="attr">fn</span>: <span class="variable language_">this</span>.<span class="property">checkDiskSpace</span> &#125;</span><br><span class="line">    ];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">runChecks</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> results = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> check <span class="keyword">of</span> <span class="variable language_">this</span>.<span class="property">checks</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> check.<span class="title function_">fn</span>();</span><br><span class="line">        results.<span class="title function_">push</span>(&#123; <span class="attr">name</span>: check.<span class="property">name</span>, <span class="attr">status</span>: <span class="string">&#x27;ok&#x27;</span> &#125;);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`✅ <span class="subst">$&#123;check.name&#125;</span> 正常`</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        results.<span class="title function_">push</span>(&#123; <span class="attr">name</span>: check.<span class="property">name</span>, <span class="attr">status</span>: <span class="string">&#x27;error&#x27;</span>, <span class="attr">message</span>: error.<span class="property">message</span> &#125;);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">`❌ <span class="subst">$&#123;check.name&#125;</span> 出错:`</span>, error.<span class="property">message</span>);</span><br><span class="line">        <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">sendAlert</span>(check.<span class="property">name</span>, error);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">sendAlert</span>(<span class="params">checkName, error</span>) &#123;</span><br><span class="line">    <span class="comment">// 发送邮件/短信/钉钉通知</span></span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">notifyAdmin</span>(&#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;health_check_failed&#x27;</span>,</span><br><span class="line">      <span class="attr">check</span>: checkName,</span><br><span class="line">      <span class="attr">error</span>: error.<span class="property">message</span>,</span><br><span class="line">      <span class="attr">time</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每4小时运行一次</span></span><br><span class="line"><span class="keyword">const</span> checker = <span class="keyword">new</span> <span class="title class_">HealthChecker</span>();</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> checker.<span class="title function_">runChecks</span>(), <span class="number">4</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-程序员该学什么"><a href="#5-3-程序员该学什么" class="headerlink" title="5.3 程序员该学什么"></a>5.3 程序员该学什么</h3><ul>
+<li><strong>监控工具</strong>：Prometheus、Grafana、Zabbix</li>
+<li><strong>日志收集</strong>：ELK Stack（Elasticsearch、Logstash、Kibana）</li>
+<li><strong>告警机制</strong>：PagerDuty、钉钉机器人、企业微信</li>
+<li><strong>容器编排</strong>：Docker、Kubernetes</li>
+<li><strong>CI&#x2F;CD</strong>：Jenkins、GitLab CI、GitHub Actions</li>
+</ul>
+<hr>
+<h2 id="六、权限设计要渐进式，别一次性给完"><a href="#六、权限设计要渐进式，别一次性给完" class="headerlink" title="六、权限设计要渐进式，别一次性给完"></a>六、权限设计要渐进式，别一次性给完</h2><h3 id="6-1-Moltbook-的权限层级"><a href="#6-1-Moltbook-的权限层级" class="headerlink" title="6.1 Moltbook 的权限层级"></a>6.1 Moltbook 的权限层级</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Level 1: 公共互动（发帖、评论、点赞）</span><br><span class="line">    ↓</span><br><span class="line">Level 2: 加入社区</span><br><span class="line">    ↓</span><br><span class="line">Level 3: 关注其他用户</span><br><span class="line">    ↓</span><br><span class="line">Level 4: 私信（需要对方同意）</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-对我们自己的项目有什么启发"><a href="#6-2-对我们自己的项目有什么启发" class="headerlink" title="6.2 对我们自己的项目有什么启发"></a>6.2 对我们自己的项目有什么启发</h3><p><strong>权限系统设计</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 权限配置</span></span><br><span class="line"><span class="keyword">const</span> permissions = &#123;</span><br><span class="line">  <span class="attr">visitor</span>: [<span class="string">&#x27;read:public&#x27;</span>],</span><br><span class="line">  <span class="attr">user</span>: [<span class="string">&#x27;read:public&#x27;</span>, <span class="string">&#x27;write:comment&#x27;</span>, <span class="string">&#x27;write:like&#x27;</span>],</span><br><span class="line">  <span class="attr">member</span>: [<span class="string">&#x27;read:public&#x27;</span>, <span class="string">&#x27;write:comment&#x27;</span>, <span class="string">&#x27;write:like&#x27;</span>, <span class="string">&#x27;write:post&#x27;</span>, <span class="string">&#x27;join:community&#x27;</span>],</span><br><span class="line">  <span class="attr">trusted</span>: [<span class="string">&#x27;read:public&#x27;</span>, <span class="string">&#x27;write:comment&#x27;</span>, <span class="string">&#x27;write:like&#x27;</span>, <span class="string">&#x27;write:post&#x27;</span>, <span class="string">&#x27;join:community&#x27;</span>, <span class="string">&#x27;write:dm&#x27;</span>],</span><br><span class="line">  <span class="attr">moderator</span>: [<span class="string">&#x27;read:public&#x27;</span>, <span class="string">&#x27;write:comment&#x27;</span>, <span class="string">&#x27;write:like&#x27;</span>, <span class="string">&#x27;write:post&#x27;</span>, <span class="string">&#x27;join:community&#x27;</span>, <span class="string">&#x27;write:dm&#x27;</span>, <span class="string">&#x27;moderate:content&#x27;</span>],</span><br><span class="line">  <span class="attr">admin</span>: [<span class="string">&#x27;*&#x27;</span>]  <span class="comment">// 所有权限</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 升级条件</span></span><br><span class="line"><span class="keyword">const</span> upgradeRules = &#123;</span><br><span class="line">  <span class="attr">user</span>: &#123;</span><br><span class="line">    <span class="attr">accountAge</span>: <span class="number">1</span>,  <span class="comment">// 注册1天</span></span><br><span class="line">    <span class="attr">emailVerified</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">member</span>: &#123;</span><br><span class="line">    <span class="attr">accountAge</span>: <span class="number">7</span>,  <span class="comment">// 注册7天</span></span><br><span class="line">    <span class="attr">postsCreated</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">noViolations</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">trusted</span>: &#123;</span><br><span class="line">    <span class="attr">accountAge</span>: <span class="number">30</span>,  <span class="comment">// 注册30天</span></span><br><span class="line">    <span class="attr">reputation</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="attr">humanVerified</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查用户是否可以升级</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">canUpgrade</span> = (<span class="params">user, targetRole</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> rules = upgradeRules[targetRole];</span><br><span class="line">  <span class="keyword">const</span> accountAge = (<span class="title class_">Date</span>.<span class="title function_">now</span>() - user.<span class="property">createdAt</span>) / (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    accountAge &gt;= rules.<span class="property">accountAge</span> &amp;&amp;</span><br><span class="line">    (!rules.<span class="property">emailVerified</span> || user.<span class="property">emailVerified</span>) &amp;&amp;</span><br><span class="line">    (!rules.<span class="property">postsCreated</span> || user.<span class="property">postsCount</span> &gt;= rules.<span class="property">postsCreated</span>) &amp;&amp;</span><br><span class="line">    (!rules.<span class="property">noViolations</span> || user.<span class="property">violations</span> === <span class="number">0</span>)</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-程序员该学什么"><a href="#6-3-程序员该学什么" class="headerlink" title="6.3 程序员该学什么"></a>6.3 程序员该学什么</h3><ul>
+<li><strong>RBAC（基于角色的访问控制）</strong>：Role-Based Access Control</li>
+<li><strong>ABAC（基于属性的访问控制）</strong>：Attribute-Based Access Control</li>
+<li><strong>JWT 权限声明</strong>：如何在 Token 中携带权限信息</li>
+<li><strong>权限中间件</strong>：Express、Koa 等框架的权限控制实现</li>
+</ul>
+<hr>
+<h2 id="七、频率限制是保护，不是为难用户"><a href="#七、频率限制是保护，不是为难用户" class="headerlink" title="七、频率限制是保护，不是为难用户"></a>七、频率限制是保护，不是为难用户</h2><h3 id="7-1-Moltbook-的频率限制策略"><a href="#7-1-Moltbook-的频率限制策略" class="headerlink" title="7.1 Moltbook 的频率限制策略"></a>7.1 Moltbook 的频率限制策略</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>限制</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发帖</td>
+<td>30分钟1次</td>
+<td>鼓励发高质量内容</td>
+</tr>
+<tr>
+<td>评论</td>
+<td>20秒1次</td>
+<td>防止刷屏</td>
+</tr>
+<tr>
+<td>每日评论</td>
+<td>50条</td>
+<td>防止刷量</td>
+</tr>
+<tr>
+<td>API 请求</td>
+<td>100次&#x2F;分钟</td>
+<td>防止滥用</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-对我们自己的项目有什么启发"><a href="#7-2-对我们自己的项目有什么启发" class="headerlink" title="7.2 对我们自己的项目有什么启发"></a>7.2 对我们自己的项目有什么启发</h3><p><strong>实现频率限制</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> rateLimit = <span class="built_in">require</span>(<span class="string">&#x27;express-rate-limit&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RedisStore</span> = <span class="built_in">require</span>(<span class="string">&#x27;rate-limit-redis&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通用限制</span></span><br><span class="line"><span class="keyword">const</span> generalLimiter = <span class="title function_">rateLimit</span>(&#123;</span><br><span class="line">  <span class="attr">store</span>: <span class="keyword">new</span> <span class="title class_">RedisStore</span>(&#123;</span><br><span class="line">    <span class="attr">client</span>: redisClient,</span><br><span class="line">    <span class="attr">prefix</span>: <span class="string">&#x27;rl:general:&#x27;</span></span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">windowMs</span>: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>, <span class="comment">// 15分钟</span></span><br><span class="line">  <span class="attr">max</span>: <span class="number">100</span>, <span class="comment">// 最多100次</span></span><br><span class="line">  <span class="attr">message</span>: &#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">error</span>: <span class="string">&#x27;请求太频繁，请稍后再试&#x27;</span>,</span><br><span class="line">    <span class="attr">retryAfter</span>: <span class="string">&#x27;15分钟&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发帖限制</span></span><br><span class="line"><span class="keyword">const</span> postLimiter = <span class="title function_">rateLimit</span>(&#123;</span><br><span class="line">  <span class="attr">store</span>: <span class="keyword">new</span> <span class="title class_">RedisStore</span>(&#123;</span><br><span class="line">    <span class="attr">client</span>: redisClient,</span><br><span class="line">    <span class="attr">prefix</span>: <span class="string">&#x27;rl:post:&#x27;</span></span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="attr">windowMs</span>: <span class="number">30</span> * <span class="number">60</span> * <span class="number">1000</span>, <span class="comment">// 30分钟</span></span><br><span class="line">  <span class="attr">max</span>: <span class="number">1</span>, <span class="comment">// 只能发1次</span></span><br><span class="line">  <span class="attr">skipSuccessfulRequests</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">message</span>: &#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">error</span>: <span class="string">&#x27;发帖太频繁，请30分钟后再试&#x27;</span>,</span><br><span class="line">    <span class="attr">retryAfter</span>: <span class="string">&#x27;30分钟&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应用限制</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api/&#x27;</span>, generalLimiter);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api/v1/posts&#x27;</span>, postLimiter);</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-程序员该学什么"><a href="#7-3-程序员该学什么" class="headerlink" title="7.3 程序员该学什么"></a>7.3 程序员该学什么</h3><ul>
+<li><strong>Redis</strong>：内存数据库，适合做频率限制的存储</li>
+<li><strong>滑动窗口算法</strong>：更精确的限流算法</li>
+<li><strong>令牌桶算法</strong>：平滑处理突发流量</li>
+<li><strong>分布式限流</strong>：多服务器场景下的限流方案</li>
+</ul>
+<hr>
+<h2 id="八、搜索功能要智能，别只匹配关键词"><a href="#八、搜索功能要智能，别只匹配关键词" class="headerlink" title="八、搜索功能要智能，别只匹配关键词"></a>八、搜索功能要智能，别只匹配关键词</h2><h3 id="8-1-Moltbook-的语义搜索"><a href="#8-1-Moltbook-的语义搜索" class="headerlink" title="8.1 Moltbook 的语义搜索"></a>8.1 Moltbook 的语义搜索</h3><p>Moltbook 支持语义搜索，不是简单的关键词匹配，而是理解查询的意图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">搜索: &quot;how do agents handle memory&quot;</span><br><span class="line">结果: 返回关于 AI 代理内存管理的帖子，即使标题里没有这些关键词</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-2-对我们自己的项目有什么启发"><a href="#8-2-对我们自己的项目有什么启发" class="headerlink" title="8.2 对我们自己的项目有什么启发"></a>8.2 对我们自己的项目有什么启发</h3><p><strong>实现简单的语义搜索</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用向量数据库（如 Pinecone、Milvus）</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">OpenAI</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;openai&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> openai = <span class="keyword">new</span> <span class="title class_">OpenAI</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 将内容转换为向量</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">createEmbedding</span> = <span class="keyword">async</span> (<span class="params">text</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> openai.<span class="property">embeddings</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">    <span class="attr">model</span>: <span class="string">&#x27;text-embedding-ada-002&#x27;</span>,</span><br><span class="line">    <span class="attr">input</span>: text</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> response.<span class="property">data</span>[<span class="number">0</span>].<span class="property">embedding</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 存储向量</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">storeContent</span> = <span class="keyword">async</span> (<span class="params">id, text</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> embedding = <span class="keyword">await</span> <span class="title function_">createEmbedding</span>(text);</span><br><span class="line">  <span class="keyword">await</span> vectorDB.<span class="title function_">upsert</span>(&#123;</span><br><span class="line">    id,</span><br><span class="line">    <span class="attr">values</span>: embedding,</span><br><span class="line">    <span class="attr">metadata</span>: &#123; text &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 语义搜索</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">semanticSearch</span> = <span class="keyword">async</span> (<span class="params">query, topK = <span class="number">10</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> queryEmbedding = <span class="keyword">await</span> <span class="title function_">createEmbedding</span>(query);</span><br><span class="line">  <span class="keyword">const</span> results = <span class="keyword">await</span> vectorDB.<span class="title function_">query</span>(&#123;</span><br><span class="line">    <span class="attr">vector</span>: queryEmbedding,</span><br><span class="line">    topK,</span><br><span class="line">    <span class="attr">includeMetadata</span>: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> results.<span class="property">matches</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-3-程序员该学什么"><a href="#8-3-程序员该学什么" class="headerlink" title="8.3 程序员该学什么"></a>8.3 程序员该学什么</h3><ul>
+<li><strong>向量数据库</strong>：Pinecone、Milvus、Weaviate</li>
+<li><strong>Embedding 模型</strong>：OpenAI、Sentence-Transformers</li>
+<li><strong>相似度算法</strong>：余弦相似度、欧氏距离</li>
+<li><strong>全文搜索引擎</strong>：Elasticsearch、Meilisearch</li>
+</ul>
+<hr>
+<h2 id="九、版本管理要做好，别让用户措手不及"><a href="#九、版本管理要做好，别让用户措手不及" class="headerlink" title="九、版本管理要做好，别让用户措手不及"></a>九、版本管理要做好，别让用户措手不及</h2><h3 id="9-1-Moltbook-的版本策略"><a href="#9-1-Moltbook-的版本策略" class="headerlink" title="9.1 Moltbook 的版本策略"></a>9.1 Moltbook 的版本策略</h3><ul>
+<li>API 版本号：v1、v2</li>
+<li>技能文件版本：1.7.0、1.8.0</li>
+<li>明确告知更新内容</li>
+</ul>
+<h3 id="9-2-对我们自己的项目有什么启发"><a href="#9-2-对我们自己的项目有什么启发" class="headerlink" title="9.2 对我们自己的项目有什么启发"></a>9.2 对我们自己的项目有什么启发</h3><p><strong>API 版本管理</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 URL 中包含版本号</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api/v1&#x27;</span>, v1Routes);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/api/v2&#x27;</span>, v2Routes);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者在 Header 中指定</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> version = req.<span class="property">headers</span>[<span class="string">&#x27;api-version&#x27;</span>] || <span class="string">&#x27;v1&#x27;</span>;</span><br><span class="line">  req.<span class="property">apiVersion</span> = version;</span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>版本发布流程</strong>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 版本发布 checklist</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> <span class="strong">**代码准备**</span></span><br><span class="line"><span class="bullet">   -</span> [ ] 功能开发完成</span><br><span class="line"><span class="bullet">   -</span> [ ] 单元测试通过</span><br><span class="line"><span class="bullet">   -</span> [ ] 集成测试通过</span><br><span class="line"></span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**文档更新**</span></span><br><span class="line"><span class="bullet">   -</span> [ ] API 文档更新</span><br><span class="line"><span class="bullet">   -</span> [ ] CHANGELOG 更新</span><br><span class="line"><span class="bullet">   -</span> [ ] 升级指南编写</span><br><span class="line"></span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**发布前检查**</span></span><br><span class="line"><span class="bullet">   -</span> [ ] 数据库迁移脚本测试</span><br><span class="line"><span class="bullet">   -</span> [ ] 回滚方案准备</span><br><span class="line"><span class="bullet">   -</span> [ ] 监控告警配置</span><br><span class="line"></span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**正式发布**</span></span><br><span class="line"><span class="bullet">   -</span> [ ] 灰度发布（先给 10% 用户）</span><br><span class="line"><span class="bullet">   -</span> [ ] 观察 24 小时</span><br><span class="line"><span class="bullet">   -</span> [ ] 全量发布</span><br><span class="line"></span><br><span class="line"><span class="bullet">5.</span> <span class="strong">**发布后跟踪**</span></span><br><span class="line"><span class="bullet">   -</span> [ ] 监控错误率</span><br><span class="line"><span class="bullet">   -</span> [ ] 收集用户反馈</span><br><span class="line"><span class="bullet">   -</span> [ ] 准备 hotfix（如有问题）</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-3-程序员该学什么"><a href="#9-3-程序员该学什么" class="headerlink" title="9.3 程序员该学什么"></a>9.3 程序员该学什么</h3><ul>
+<li><strong>语义化版本</strong>：SemVer（主版本.次版本.修订号）</li>
+<li><strong>API 兼容性</strong>：向后兼容、弃用策略</li>
+<li><strong>蓝绿部署</strong>：零停机发布</li>
+<li><strong>功能开关</strong>：Feature Flag，随时开启&#x2F;关闭功能</li>
+</ul>
+<hr>
+<h2 id="十、写在最后：做产品要务实"><a href="#十、写在最后：做产品要务实" class="headerlink" title="十、写在最后：做产品要务实"></a>十、写在最后：做产品要务实</h2><p>看完 Moltbook 的设计，最大的感受是：<strong>做产品要务实</strong>。</p>
+<p>它不是那种追求”全自动化”的激进派，而是很务实地考虑：</p>
+<ul>
+<li>哪些地方可以让 AI 自主？</li>
+<li>哪些地方必须人类参与？</li>
+<li>怎么设计才能既高效又安全？</li>
+</ul>
+<p>这些思路不仅适用于 AI 产品，对普通的产品设计也很有参考价值。毕竟，好的设计都是相通的。</p>
+<p>作为程序员，我们不仅要写好代码，还要学会从产品的角度思考问题。希望这篇文章对你有帮助！</p>
+<hr>
+<h2 id="学习路线图"><a href="#学习路线图" class="headerlink" title="学习路线图"></a>学习路线图</h2><p>如果你看完想深入学习，建议按这个顺序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">第一阶段（基础）：</span><br><span class="line">├── Markdown 语法</span><br><span class="line">├── RESTful API 设计</span><br><span class="line">├── Git 版本控制</span><br><span class="line">└── 基础安全知识</span><br><span class="line"></span><br><span class="line">第二阶段（进阶）：</span><br><span class="line">├── Swagger/OpenAPI 文档</span><br><span class="line">├── JWT 认证授权</span><br><span class="line">├── Redis 缓存</span><br><span class="line">└── Docker 容器化</span><br><span class="line"></span><br><span class="line">第三阶段（高级）：</span><br><span class="line">├── Kubernetes 编排</span><br><span class="line">├── 微服务架构</span><br><span class="line">├── 分布式系统</span><br><span class="line">└── 向量搜索/AI 集成</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>参考链接</strong>：<a target="_blank" rel="noopener" href="https://www.moltbook.com/">Moltbook 官网</a></p>
+<p><strong>关于作者</strong>：一个喜欢研究产品设计的程序员。觉得有用就点个关注吧！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">GaoHui</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://gaohui0611.github.io/2026/03/10/2026-03-10-programmer-website-design/">https://gaohui0611.github.io/2026/03/10/2026-03-10-programmer-website-design/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">GaoHui</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/">
+                                    <span class="chip bg-color">网站设计</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                                    <span class="chip bg-color">编程</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BB%8F%E9%AA%8C/">
+                                    <span class="chip bg-color">经验</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/03/10/2026-03-10-nanobot/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="nanobot：4000 行代码打造的超轻量级 AI 助手">
+                        
+                        <span class="card-title">nanobot：4000 行代码打造的超轻量级 AI 助手</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-03-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="chip bg-color">开源</span>
+                    </a>
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/03/10/2026-03-10-ai-applications-2026/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="AI 最新应用全景：2026 年的重要启示">
+                        
+                        <span class="card-title">AI 最新应用全景：2026 年的重要启示</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%B6%8B%E5%8A%BF/">
+                        <span class="chip bg-color">趋势</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A7%91%E6%8A%80/">
+                        <span class="chip bg-color">科技</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">GaoHui</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/gaohui0611" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

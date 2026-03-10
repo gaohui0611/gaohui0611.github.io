@@ -1,5 +1,18 @@
 # Matery 主题配置
 
-# 头像配置
+# 首页个人信息
 profile:
   avatar: https://avatars.githubusercontent.com/u/33216664?v=4
+  email: gaohui0611@users.noreply.github.com
+
+# 社交链接
+socialLink:
+  github: https://github.com/gaohui0611
+
+# 页脚配置
+myProjects:
+  enable: false
+
+# 推荐文章（置顶）
+recommendedPosts:
+  enable: false

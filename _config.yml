@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我的技术博客
+title: GaoHui's Blog
 subtitle: 记录学习与成长
-description: 基于 Hexo + GitHub Pages 搭建的个人技术博客
+description: 个人技术博客，分享编程知识和技术心得
 keywords: 技术,博客,编程,学习笔记
-author: 你的名字
+author: GaoHui
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://gaohui0611.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

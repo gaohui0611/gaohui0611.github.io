@@ -49,6 +49,10 @@ jobs:
       - name: Generate static files
         run: npx hexo generate
 
+      # 6.5 移除可能触发 GitHub Push Protection 的文件
+      - name: Remove twikoo library
+        run: rm -rf public/libs/twikoo
+
       # 7. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
